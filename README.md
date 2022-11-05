@@ -214,8 +214,27 @@ plt.imshow(image_np)
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/27.1_.jpg?raw=true)
 
+ - From `/research/slim/`  copy `deployment` folder and paste in `/research` folder
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/28_.jpg?raw=true)
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/29_.jpg?raw=true)
 
 
+
+### Start training of the model
+ 
+```bash
+cd models/research 
+```
+
+- make changes in the code 
+`python train.py --logtostderr --train_dir=<path to custom model saving folder> --pipeline_config_path=<path to config file>`
+
+Eg:
+```bash
+python train.py --logtostderr --train_dir=custom_training/ --pipeline_config_path=custom_training/custom_config.config
+```
 
 
 
