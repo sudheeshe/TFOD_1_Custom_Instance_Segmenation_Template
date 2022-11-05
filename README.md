@@ -12,8 +12,19 @@
 - Extract the files and rename `models-1.13`.0 to `models` and pretrained model name to any convenient short name `eg: my_model`
 - Inside models folder we have many sub folders which we can delete unnecessary folders. Keep only research folder remaining folders we can delete
 
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/data_structure_template.png?raw=true)
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/1_.jpg?raw=true)
 
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/2_.jpg?raw=true)
+
+- Inside research folder keep only `object detection`, `sim` folders and `setup.py` file. We can delete the remaining folders and files
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/3_.jpg?raw=true)
+
+- From slim folder copy `nets` folder and paste in research folder
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/4_.jpg?raw=true)
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/5_.jpg?raw=true)
 
 
 
@@ -29,6 +40,8 @@
 - Note: Ignore on `labels.cache` file it generated during previous training
 
 ![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/data_structure_template.png?raw=true)
+
+
 
 
 ### Create .zip file with for training
