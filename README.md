@@ -26,6 +26,57 @@
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/5_.jpg?raw=true)
 
+- Now open the project in Pycharm and select python 3.6 as version
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/6_.jpg?raw=true)
+
+- Let's install the following packages in your new environment
+
+for CPU 
+```bash
+pip install pillow lxml Cython contextlib2 jupyter matplotlib pandas opencv-python tensorflow==1.15.0
+```
+
+for GPU
+```bash
+pip install pillow lxml Cython contextlib2 jupyter matplotlib pandas opencv-python tensorflow-gpu==1.15.0
+```
+
+- In TFOD 1.X most of the files are written in protobuf. But in our case our python compiler will not understand protobuf format.
+- So here we are converting these protobuf files to python file by the help of protobuf library.
+- These protos files are available at `research/object_detection/protos` location
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/7_.jpg?raw=true)
+
+- Now lets converts these files to python file, For that we need to install the below library
+
+```bash
+conda install -c anaconda protobuf
+```
+
+- Now lets convert these protos to python files
+
+```bash
+cd models/research/
+
+protoc object_detection/protos/*.proto --python_out=.
+```
+- Now we can see that every python files corresponding to every protos files got generated
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/8_.jpg?raw=true)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -40,6 +91,9 @@
 - Note: Ignore on `labels.cache` file it generated during previous training
 
 ![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/data_structure_template.png?raw=true)
+
+
+
 
 
 
