@@ -9,7 +9,10 @@
   2) Choose model[click here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md)
   3) 
 
-- Extract the files and rename `models-1.13`.0 to `models` and pretrained model name to any convenient short name `eg: my_model`
+- Extract the files and rename `models-1.13`.0 to `models` and pretrained model name to any convenient short name `eg: mask_rcnn_inception_v2`
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/0_.jpg?raw=true)
+
 - Inside models folder we have many sub folders which we can delete unnecessary folders. Keep only research folder remaining folders we can delete
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/1_.jpg?raw=true)
@@ -61,10 +64,65 @@ cd models/research/
 protoc object_detection/protos/*.proto --python_out=.
 ```
 - Now we can see that every python files corresponding to every protos files got generated
+
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/8_.jpg?raw=true)
 
+- Now we will be running setup.py file to install object detection library
+- Run the below command in `/research` folder
+
+```bash
+python setup.py install
+```
+
+- If the run was successful you will get the below message.
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/9_.jpg?raw=true)
+
+- To verify that everything just we have done till here is working well. Let's do an evaluation
+- For that launch jupyter notebook from research and go inside `object detection` folder
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/10_.jpg?raw=true)
+
+- From there open `object_detection_tutorial.ipynb` jupyter file
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/11_.jpg?raw=true)
+
+- It will ask to select the kernal.
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/12_.jpg?raw=true)
+
+- Run all the cells
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/13_.jpg?raw=true)
+
+- The result will be 
+- 
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/14_.jpg?raw=true)
+
+- Note: 
+matplotlib inline will not work by default so the image won't appear in the notebook
+So run the below code in a notebook
+```bash
+%matplotlib inline
+
+plt.figure(figsize=(20,20))
+plt.imshow(image_np)
+```
 
 
+- Now we need to add some files to `/research` folder which is available in this repo
+
+       1) create_tf_records.py
+       2) read_pbtxt.py 
+
+- Now copy these files to `/research` folder
+
+        1) "export_inference_graph.py" file from "research/object_detection/"
+        2) "string_int_label_map_pb2.py" from "research/object_detection/protos"
+        3) "train.py" from "research/object_detection/legacy"
+
+- Create a new folder named `mask_rcnn` in `/research` folder and move files inside `mask_rcnn_inception_v2` 
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/14_.jpg?raw=true)
 
 
 
