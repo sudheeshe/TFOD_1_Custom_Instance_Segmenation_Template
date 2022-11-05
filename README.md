@@ -1,6 +1,23 @@
-# TFOD_1 Custom Training for Instance Segmenation
+# TFOD_1 CUSTOM TRAINING FOR INSTANCE SEGMENTATION
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/DV8TLgkWsAEGsEs.jpg?raw=true)
+
+# PREPARE WORKING ENVIRONMENT FOR TRAINING 
+
+- Download following files
+  1) TFOD-1.x (v1.13.0)[click here](https://github.com/tensorflow/models/tree/v1.13.0)
+  2) Choose model[click here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md)
+  3) 
+
+- Extract the files and rename `models-1.13`.0 to `models` and pretrained model name to any convenient short name `eg: my_model`
+- Inside models folder we have many sub folders which we can delete unnecessary folders. Keep only research folder remaining folders we can delete
 
 ![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/data_structure_template.png?raw=true)
+
+
+
+
+
 
 
 # PREPARE DATA FOR TRAINING
