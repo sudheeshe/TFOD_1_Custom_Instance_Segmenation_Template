@@ -131,14 +131,55 @@ plt.imshow(image_np)
 - Create a new folder named `training_data` in `/research` folder
 - Create sub folders` train_imgs, train_json,test_imgs, test_json`
 
-![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/16_.jpg?raw=true)
 
 - Place `training images` in `train_imgs` and `training image annotations` in `train_json` folder
-- Similarly, place `validation images` in `test_imgs` and `validation image annotations` in `test_json` folder
+- Similarly, place `validation images` in `test_imgs` folder and `validation image annotations` in `test_json` folder
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/17_.jpg?raw=true)
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/18_.jpg?raw=true)
+
+- copy labelmap.pbtxt to `training_data` folder and change the class names.
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/19_.jpg?raw=true)
+
+- Now do the necessary changes in `create_tf_records.py` file
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/16_.jpg?raw=true)
+
+- Note: if absolute path is not working give full path
+
+- With this `create_tf_records.py` file we will be creating `train.record` and `test.record`, Which is nothing but an efficient file format 
+ which Object Detection API uses for training the model.
+
+- First un-comment training section and comment test sectionand run `create_tf_records.py` which create train.record
+- Then comment training section and un-comment test section and run `create_tf_records.py` which will create test.record
+
+- On a sucessful creation of train.record we can see the below message
+- 
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/20_.jpg?raw=true)
+
+- Note: Check the size of train.record if it shows `0K` the check the specified paths
+- Note: Based on labelme version the `imagePath` mentioned will be in different ways.
+ If we open any annotation file and check for `imagePath`  
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/21_.jpg?raw=true)
+
+- This `imagePath` format may change based on labelme version.
+
+- Always check the annotation file for `imagePath` format and make any changes needed `split() function` to get output as only image name.
+
+- So debug the `create_tf_records.py` @ line number 171 and verify it is only image name.
+- 
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/22_.jpg?raw=true)
+
+- In this i have used `split('\\')` but may be in another case we need this to change `split('/')` or `split('\')` depend on labelme version.
+
+
+
+
+
+
 
 
 

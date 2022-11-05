@@ -168,7 +168,7 @@ def _get_annotation_dict(images_dir, annotation_json_path):
     image_relative_path = json_text.get('imagePath', None)
     if image_relative_path is None:
         return None
-    image_name = image_relative_path.split('/')[-1]
+    image_name = image_relative_path.split('\\')[-1]
     image_path = os.path.join(images_dir, image_name)
     image_format = image_name.split('.')[-1].replace('jpg', 'jpeg')
     if not os.path.exists(image_path):
