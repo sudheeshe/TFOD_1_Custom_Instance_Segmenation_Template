@@ -193,11 +193,26 @@ plt.imshow(image_np)
 
 - Open `custom_config` file, and we need to change few lines of code
 
+1) Change the number of classes at line number 10 as per the project 
+
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/25_.jpg?raw=true)
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/25.1_.jpg?raw=true)
+
+2) Provide the path of the pre-trained model which we downloaded from Model zoo at line number 127
+3) Change the number of epochs at line number 133
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/26_.jpg?raw=true)
 
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/26.1_.jpg?raw=true)
+
+4) Provide path of `train.record` path at line 142, 
+5) Give path of `labelmap.pbtxt` path at line 144 & 160
+6) Give path of `test.record` path at line 158,
+
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/27_.jpg?raw=true)
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/27.1_.jpg?raw=true)
 
 
 
