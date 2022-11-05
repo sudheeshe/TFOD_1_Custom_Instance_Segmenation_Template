@@ -173,18 +173,31 @@ plt.imshow(image_np)
 - 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/22_.jpg?raw=true)
 
-- In this i have used `split('\\')` but may be in another case we need this to change `split('/')` or `split('\')` depend on labelme version.
+- This below image shows the wrong format
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/23_.jpg?raw=true)
 
+- In this I have used `split('\\')` but may be in another case we need this to change `split('/')` or `split('\')` depend on labelme version.
 
 
 
+# TRAINING CUSTOM MASK-RCNN MODEL 
 
+- Create a new folder named `custom_training` on `/research` folder
 
+- Now we need to config file to train the mask-rcnn model
+- If we check `research/object_detection/samples/configs` path we can see multiple configuration files for all the models which are available in TFOD 1.x
+- We need to copy `mask_rcnn_inception_v2_coco` file and paste in `custom_training` folder which we created previously.
+- And rename to a smaller name `eg: custom_config`
 
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/24_.jpg?raw=true)
 
+- Open `custom_config` file, and we need to change few lines of code
 
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/25_.jpg?raw=true)
 
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/26_.jpg?raw=true)
 
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/27_.jpg?raw=true)
 
 
 
@@ -198,12 +211,7 @@ plt.imshow(image_np)
 
 
 
-- Train, Val and Test folders should have sub-folder named `images` and `labels`
-- labels should be in .txt format
-- Test folder not need labels, since we are using test images for prediction
-- Note: Ignore on `labels.cache` file it generated during previous training
 
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/data_structure_template.png?raw=true)
 
 
 
@@ -211,124 +219,12 @@ plt.imshow(image_np)
 
 
 
-### Create .zip file with for training
-  1) train
-  2) val
-  3) test
-  4) data.yaml
-  5) YOLO_V5_Custom_Training.ipynb
-  6) custom_yolov5s.yaml
 
 
 
-# PREPARE PAPERSPACE VM
 
 
-  ### Step - 1
 
-  #### Create ssh on MobaXterm
-
-  - Open a new terminal in `MobaXterm` Run the following command
-
-  ```bash
-  ssh-keygen
-  ```
-
-  ```bash
-  - cd /home/sudheeshe/.ssh
-  ```
-
-  ![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/ssh_keygen.png?raw=true)
-
-  - Print out your public key with
-  ```bash
-  cat ~/.ssh/id_rsa.pub
-  ```
-
- ![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/show_ssh_key.png?raw=true)
-
-- copy the above ssh key.
-
- ### Step - 2
-
-- Select `Core virtual servers`
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/1_.png?raw=true)
-
-- Select `create a machine` from that select `ML-in-a-box-Ubuntu 20.4` version
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/2_.png?raw=true)
-
-- Select GPU as P4000
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/3_.png?raw=true)
-
-- Add SSH key if ssh was not added previously. If ssh key is already added and we need to rewrite the existing ssh key you can go with steps mentioned later on this file.
-
-- Click create button to create the VM
-
-
-### First way to access VM using MobiXterm is
-### Method - 1 Adding SSH Keys
-
-  - You can add SSH keys on the SSH Keys page in the console. Specify a name for the key and copy/paste the output from step 2 of key generation. Once you’ve added a key, you can select it during machine creation to automatically add it to new CORE machines.
-
-#### step - i
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/ssh_add_1.png?raw=true)
-
-#### step - ii
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/ssh_add_2.png?raw=true)
-
-- Yellowline shows previously added ssh keys, with the ssh key name
-
-#### step - iii
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/ssh_add_3.png?raw=true)
-
-- paste the copied ssh key from MobaXterm here
-
-### Step - 3
-
-- Start the machine we created
-- Once the VM is started we can initialize the connection by using ssh, Click on connet button
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/4_.png?raw=true)
-
-- This generates the pop-up with ssh command, which we need to copy and paste it on MobaXterm to initiate the connection
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/5_.png?raw=true)
-
-- Now open a new terminal on MobaXterm
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/6_.png?raw=true)
-
-- Paste the ssh commad on this new terminal and press enter to make the connection with paperspace VM
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/7_.png?raw=true)
-
-- Connection will get established, we can now see the folders in the VM marked in red
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/8_.png?raw=true)
-
-- We will be using this terminal for code execution.
-
-### Method - 2 By password
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/ssh_password.png?raw=true)
-
-- Password will be sent to the registered email id
-- Go to created VM and click on `connect` and copy the ssh command and past on MobiXterm terminal and press enter.
-- While establishing connection to VM using MobiXterm it will prompt for password.
-provide the password over there.
-
-### Choose Method - 2 over Method - 1, Since VM will ask for password even if you create connection through ssh when we try to again connect after restart of VM.
-
-
-# TRAINING YOLOV5 MODEL
-
-### Create a working directory with project name `eg: PCB_Defect_Detection` on `Paperspace or Colab`
 
 
 ### Change to working directory
