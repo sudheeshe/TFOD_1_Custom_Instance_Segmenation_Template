@@ -122,27 +122,41 @@ plt.imshow(image_np)
 
 - Create a new folder named `mask_rcnn` in `/research` folder and move files inside `mask_rcnn_inception_v2` 
 
-![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/14_.jpg?raw=true)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/15_.jpg?raw=true)
 
 
 # PREPARE DATA FOR TRAINING
 
-### Data template
+### Data Folder Structure
+- Create a new folder named `training_data` in `/research` folder
+- Create sub folders` train_imgs, train_json,test_imgs, test_json`
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/16_.jpg?raw=true)
+
+- Place `training images` in `train_imgs` and `training image annotations` in `train_json` folder
+- Similarly, place `validation images` in `test_imgs` and `validation image annotations` in `test_json` folder
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/17_.jpg?raw=true)
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/18_.jpg?raw=true)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 - Train, Val and Test folders should have sub-folder named `images` and `labels`
 - labels should be in .txt format
 - Test folder not need labels, since we are using test images for prediction

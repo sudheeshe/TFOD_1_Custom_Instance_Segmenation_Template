@@ -5,7 +5,7 @@ Created on Sun Aug 26 10:57:09 2018
 
 @author: shirhe-lyh
 """
-from models.research import read_pbtxt_file
+from models.research import read_pbtxt
 #import read_pbtxt
 """Convert raw dataset to TFRecord for object_detection.
 
@@ -238,20 +238,20 @@ def main(_):
     # if not os.path.exists(FLAGS.label_map_path):
     #     raise ValueError('`label_map_path` is not exist.')
 
-    #trainImagePath = "../research/object_detection/mycustomdataset/train_images"
-    #trainImageJsonPath = "../research/object_detection/mycustomdataset/train_jsons"
-    #labelMapPath = "../research/object_detection/data/labelmapcustom.pbtxt"
-    #outputFolderPath = "../research/object_detection/data/custom_train.record"
+    #trainImagePath = "../research/object_detection/mycustomdataset/train_images"        # PATH TO TRAINING IMAGE FOLDER
+    #trainImageJsonPath = "../research/object_detection/mycustomdataset/train_jsons"     # PATH TO TRAINING IMAGE LABELS
+    #labelMapPath = "../research/object_detection/data/labelmapcustom.pbtxt"             # PATH TO LABEL MAP
+    #outputFolderPath = "../research/object_detection/data/custom_train.record"          # PATH TO TRAINING TF-RECORD FILE
 
-    trainImagePath = "../research/object_detection/traindata/testing"
-    trainImageJsonPath = "../research/object_detection/traindata/testjson"
-    labelMapPath = "../research/object_detection/data/labelmapdog.pbtxt"
-    outputFolderPath = "../research/object_detection/data/custom_test_dog.record"
+    trainImagePath = "../research/object_detection/traindata/testing"                   # PATH TO TESTING IMAGE FOLDER
+    trainImageJsonPath = "../research/object_detection/traindata/testjson"              # PATH TO TESTING IMAGE LABELS
+    labelMapPath = "../research/object_detection/data/labelmapdog.pbtxt"                # PATH TO LABEL MAP
+    outputFolderPath = "../research/object_detection/data/custom_test_dog.record"       # PATH TO TESTING TF-RECORD FILE
 
 
 
     # label_map = read_pbtxt_file.get_label_map_dict(FLAGS.label_map_path)
-    label_map = read_pbtxt_file.get_label_map_dict(labelMapPath)
+    label_map = read_pbtxt.get_label_map_dict(labelMapPath)
     writer = tf.python_io.TFRecordWriter(outputFolderPath)
     annotations_json_path = os.path.join(trainImageJsonPath, '*.json')
     # writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
