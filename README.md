@@ -237,6 +237,9 @@ python train.py --logtostderr --train_dir=custom_training/ --pipeline_config_pat
 ```
 
 
+- Once the Training starts you can see a message like this
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/30_.jpg?raw=true)
 
 
 
@@ -261,112 +264,7 @@ python train.py --logtostderr --train_dir=custom_training/ --pipeline_config_pat
 
 
 
-### Change to working directory
 
-```bash
-cd <path of working folder eg: PCB_Defect_Detection>
-```
-
-### Check current working directory
-
-```bash
-pwd
-```
-
-### Install Miniconda and create environment
-
-- Here we have used Python 3.7 64bit installer, from below link we can choose any other Linux Python installer
-
-https://docs.conda.io/en/latest/miniconda.html#linux-installers
-
-```bash
-wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.12.0-Linux-x86_64.sh
-
-bash Miniconda3-py37_4.12.0-Linux-x86_64.sh
-
-source ~/.bashrc
-
-conda create -n <env_name> python=3.7 -y
-
-conda activate <env_name>
-```
-
-
-### Cloning YOLOv5 repo on working folder eg: PCB_Defect_Detection
-
-```bash
-git clone https://github.com/ultralytics/yolov5
-
-cd yolov5
-
-git reset --hard fbe67e465375231474a2ad80a4389efc77ecff99
-```
-
-### Install dependencies
-```bash
-pip install -qr requirements.txt
-```
-
-### Copy the above created zip file to the working Directory and unzip it.
-
-- Now folder structure will look like
-
-      yolov5/
-              1) "yolo files downloaded from git repos"
-              2) train
-              3) val
-              4) test
-              5) data.yaml
-              6) YOLO_V5_Custom_Training.ipynb
-              7) custom_yolov5s
-
-
-
-### Save the custom_yolov5s.yaml
-
-#### what is `custom_yolov5s.yaml` file
-~~~
-- In `yolov5` folder we already have `yolov5s.yaml` which was used to train `yolov5 small version` (pretrained yolo).
-- In order to train our custom yolo we are editing this `yolov5s.yaml` according to our specification.
-- We are only changing the `number of classes (nc:)` in this yaml file an creating a new file called `custom_yolov5s.yaml`
-~~~
-
-- Since we have already prepared custom_yolov5s.yaml and which is available in zip file.
-- So We are moving the `custom_yolov5s.yaml` to the `models/custom_yolov5s.yaml` location as shown below
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/custom_yaml.png?raw=true)
-
-### Change the data.yaml file `train and val` locations, `names` name of classes and `nc` number of classes
-
-![alt text](https://github.com/sudheeshe/YoloV5_Custom_training_template/blob/main/imgs/data_yaml.png?raw=true)
-
-
-### Train Custom YOLOv5 Detector
-
-Here, we are able to pass a number of arguments:
-
-```
-img: define input image size
-batch: determine batch size
-epochs: define the number of training epochs. (Note: often, 3000+ are common here!)
-data: set the path to our yaml file
-cfg: specify our model configuration
-weights: specify a custom path to weights. (Note: you can download weights from the Ultralytics Google Drive folder)
-name: result names
-nosave: only save the final checkpoint
-cache: cache images for faster training
-```
-
-- We can change file location of`data.yml` and `custom_yolov5s.yaml` if needed,
-- Since we have placed these files inside `yolov5` folder itself, So we can run the below command as it is. We don't need to change the path.
-
-```bash
-cd yolov5
-
-python train.py --img 416 --batch 32 --epochs 100 --data data.yaml --cfg models/custom_yolov5s.yaml --weights '' --name yolov5s_results  --cache
-
-
-```
 
 ### To view tensorboard logs
 
