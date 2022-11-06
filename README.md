@@ -5,11 +5,18 @@
 # PREPARE WORKING ENVIRONMENT FOR TRAINING 
 
 - Download following files
-  1) TFOD-1.x (v1.13.0)[click here](https://github.com/tensorflow/models/tree/v1.13.0)
-  2) Choose model[click here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md)
-  3) 
+  1) TFOD-1.x (v1.13.0) - [click here](https://github.com/tensorflow/models/tree/v1.13.0)
+  2) Choose model  -   [click here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md)
 
-- Extract the files and rename `models-1.13`.0 to `models` and pretrained model name to any convenient short name `eg: mask_rcnn_inception_v2`
+#### Note:
+- If you are using Paperspace GPU, Please download the Pycharm and execute the project in Pycharm
+- Since Paperspace VM by default uses TF2.x as default version for all environment it creates. For this project we need TF 1.x, so for a plane environment better use Pycharm
+- For Pycharm Installation in Linux [click here](https://www.geeksforgeeks.org/how-to-install-python-pycharm-on-linux/)
+- Once the installation of Pycharm is done, create interpreter with python 3.7 and install dependencies with `requirements.txt` file which is available in this repo
+
+
+
+- Extract the files and rename `models-1.13.0` to `models` and pretrained model name to any convenient short name `eg: mask_rcnn_inception_v2`
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/0_.jpg?raw=true)
 
@@ -29,7 +36,7 @@
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/5_.jpg?raw=true)
 
-- Now open the project in Pycharm and select python 3.6 as version
+- Now open the project in Pycharm and select `python 3.7` as version
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/6_.jpg?raw=true)
 
 - Let's install the following packages in your new environment
@@ -44,6 +51,13 @@ for GPU
 pip install pillow lxml Cython contextlib2 jupyter matplotlib pandas opencv-python tensorflow-gpu==1.15.0
 ```
 
+#### Note:
+
+- for GPU version in Paperspace the default version will be tf.2.x which will get selected by default on every environment we create.
+- So for Paperspace training download pycharm execute this project in pycharm to avoid unnecessary dependency issues.
+
+
+
 - In TFOD 1.X most of the files are written in protobuf. But in our case our python compiler will not understand protobuf format.
 - So here we are converting these protobuf files to python file by the help of protobuf library.
 - These protos files are available at `research/object_detection/protos` location
@@ -53,8 +67,11 @@ pip install pillow lxml Cython contextlib2 jupyter matplotlib pandas opencv-pyth
 - Now lets converts these files to python file, For that we need to install the below library
 
 ```bash
-conda install -c anaconda protobuf
+conda install -c anaconda protobuf==3.19.6
 ```
+#### Note:
+- Or else you can directly install `protobuf==3.19.6` from `whl` file which is available in this repo.
+
 
 - Now lets convert these protos to python files
 
@@ -241,66 +258,43 @@ python train.py --logtostderr --train_dir=custom_training/ --pipeline_config_pat
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/30_.jpg?raw=true)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### Note:
+If your training is stuck at `global_step/sec:0` the problem will be the train.record or test.record will not get generated properly. Check the size of these file and if needed create new one.
 
 
 ### To view tensorboard logs
 
 ```bash
-tensorboard --logdir runs
+tensorboard --logdir=custom_training/
 ```
 
-### Run Inference With Trained Weights
-- 2 paths we need to provide
+### Saving the Model
 
-      1) best weight path (best.pt)
-      2) test image path
-
-- We can provide what is the confidence score (threshold)  using `--conf` argument for prediction. whatever predictions below this will not get generated. Closer to `0 - less threshold` closer to `1 - higher threshold`.
-
-
+- To do predictions we need to save the `.ckpt` file to `.pb` format, For conversion run the below code
+- Mention config file path @ `pipeline_config_path`, last ckpt file path which need to be saved @ `trained_checkpoint_prefix`, folder path where you need to save the model @ `output_directory`
 ```bash
-cd yolov5
-python detect.py --weights runs/train/yolov5s_results/weights/best.pt --img 416 --conf 0.5 --source test/images
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path custom_training/custom_config.config --trained_checkpoint_prefix custom_training/model.ckpt-2000 --output_directory saved_model
+
 ```
+- The file will get saved at the `saved_model` folder
 
-- Prediction images will be available in yolov5/runs/detect
+### Inferencing
+- Make a new folder `/research/test_images` and place the test images on this folder
+- Open `object_detection_tutorial.ipynb` jupyter notebook form `models/research/object_detection/object_detection_tutorial.ipynb`
+- Do the following changes in the file
+- Mention the saved_model path here
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/31_.jpg?raw=true)
 
-### Export Trained Weights for Future Inference
+- Mention the `labelmap.pbtxt` file path
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/32_.jpg?raw=true)
 
-```bash
-from google.colab import drive
-drive.mount('/content/gdrive')
-```
+- Make these changes
 
-```bash
-cp /content/yolov5/runs/train/yolov5s_results/weights/best.pt /content/gdrive/MyDrive/Research/SignLanguageDetection
-```
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/33_.jpg?raw=true)
+
+![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/34_.jpg?raw=true)
+
 
 ### Reference blogs
 
-- https://towardsdatascience.com/how-to-train-a-custom-object-detection-model-with-yolo-v5-917e9ce13208
-- https://github.com/entbappy/Sign-Language-Generation-From-Video-using-YOLOV5
-  
+- TFOD 1.x Installation Guide [click here](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/tensorflow-1.14/install.html)
