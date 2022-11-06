@@ -70,8 +70,8 @@ pip install pillow lxml Cython contextlib2 jupyter matplotlib pandas opencv-pyth
 ```bash
 conda install -c anaconda protobuf==3.19.6
 ```
-#### Note:
-- Or else you can directly install `protobuf==3.19.6` from `whl` file which is available in this repo.
+#### Note:  
+For Linux you can directly install `protobuf==3.19.6` from `whl` file which is available in this repo.
 
 
 - Now lets convert these protos to python files
@@ -85,18 +85,20 @@ protoc object_detection/protos/*.proto --python_out=.
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/8_.jpg?raw=true)
 
-- Now we will be running setup.py file to install object detection library
+- Now we will be running `setup.py` file to install object detection library
 - Run the below command in `/research` folder
 
 ```bash
+cd models/research
 python setup.py install
 ```
 
 - If the run was successful you will get the below message.
+
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/9_.jpg?raw=true)
 
-- To verify that everything just we have done till here is working well. Let's do an evaluation
-- For that launch jupyter notebook from research and go inside `object detection` folder
+- Let's do an evaluation to verify that everything just we have done till here is working well.
+- For that launch `jupyter notebook` from `/research` and go inside `object detection` folder
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/10_.jpg?raw=true)
 
@@ -113,7 +115,7 @@ python setup.py install
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/13_.jpg?raw=true)
 
 - The result will be 
-- 
+
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/14_.jpg?raw=true)
 
 - Note: 
@@ -147,7 +149,7 @@ plt.imshow(image_np)
 
 ### Data Folder Structure
 - Create a new folder named `training_data` in `/research` folder
-- Create sub folders` train_imgs, train_json,test_imgs, test_json`
+- Create sub folders` train_imgs, train_json, test_imgs, test_json`
 
 
 - Place `training images` in `train_imgs` and `training image annotations` in `train_json` folder
@@ -170,31 +172,32 @@ plt.imshow(image_np)
 - With this `create_tf_records.py` file we will be creating `train.record` and `test.record`, Which is nothing but an efficient file format 
  which Object Detection API uses for training the model.
 
-- First un-comment training section and comment test sectionand run `create_tf_records.py` which create train.record
+- First un-comment training section and comment test section and run `create_tf_records.py` which create train.record
 - Then comment training section and un-comment test section and run `create_tf_records.py` which will create test.record
 
 - On a sucessful creation of train.record we can see the below message
-- 
+
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/20_.jpg?raw=true)
 
-- Note: Check the size of train.record if it shows `0K` the check the specified paths
-- Note: Based on labelme version the `imagePath` mentioned will be in different ways.
- If we open any annotation file and check for `imagePath`  
+- Note: Check the size of train.record if it shows `0K (zero KB)` then first check the specified paths
+- Note: Based on labelme version the `imagePath` mentioned will be in different ways. To check that open any annotation file and check for `imagePath`  
 
+eg:
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/21_.jpg?raw=true)
 
 - This `imagePath` format may change based on labelme version.
 
-- Always check the annotation file for `imagePath` format and make any changes needed `split() function` to get output as only image name.
+- Always check the annotation file for `imagePath` format and make any changes needed in `split() function` to get output as only image name.
 
 - So debug the `create_tf_records.py` @ line number 171 and verify it is only image name.
-- 
+Eg:
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/22_.jpg?raw=true)
+- The above shows only the image name
 
-- This below image shows the wrong format
+- This below image shows the wrong format Eg:
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/23_.jpg?raw=true)
 
-- In this I have used `split('\\')` but may be in another case we need this to change `split('/')` or `split('\')` depend on labelme version.
+- In this case we can use `split('\\')` to get image name only. Similarly, for another case we need this to change `split('/')` or `split('\')` depend on labelme version.
 
 
 
@@ -203,7 +206,8 @@ plt.imshow(image_np)
 - Create a new folder named `custom_training` on `/research` folder
 
 - Now we need to config file to train the mask-rcnn model
-- If we check `research/object_detection/samples/configs` path we can see multiple configuration files for all the models which are available in TFOD 1.x
+- If we check `research/object_detection/samples/configs` path we can see multiple configuration files for all the models which are available in TFOD 1.x model garden.
+- In my case I'm using `mask_rcnn_inception_v2_coco` model for instance segmentation.
 - We need to copy `mask_rcnn_inception_v2_coco` file and paste in `custom_training` folder which we created previously.
 - And rename to a smaller name `eg: custom_config`
 
@@ -211,7 +215,7 @@ plt.imshow(image_np)
 
 - Open `custom_config` file, and we need to change few lines of code
 
-1) Change the number of classes at line number 10 as per the project 
+1) Change the number of classes at line number 10 `num_classes` as per classes in the project. 
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/25_.jpg?raw=true)
 
@@ -260,7 +264,7 @@ python train.py --logtostderr --train_dir=custom_training/ --pipeline_config_pat
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/30_.jpg?raw=true)
 
 #### Note:
-If your training is stuck at `global_step/sec:0` the problem will be the train.record or test.record will not get generated properly. Check the size of these file and if needed create new one.
+If your training is stuck at `global_step/sec:0` the problem will be the train.record or test.record which not generated properly. Check the size of these file and if needed create new one.
 
 
 ### To view tensorboard logs
@@ -281,19 +285,21 @@ python export_inference_graph.py --input_type image_tensor --pipeline_config_pat
 
 ### Inferencing
 - Make a new folder `/research/test_images` and place the test images on this folder
-- Open `object_detection_tutorial.ipynb` jupyter notebook form `models/research/object_detection/object_detection_tutorial.ipynb`
+- Open `object_detection_tutorial.ipynb` jupyter notebook from `models/research/object_detection/object_detection_tutorial.ipynb`
 - Do the following changes in the file
-- Mention the saved_model path here
+- Mention the `saved_model` path here
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/31_.jpg?raw=true)
 
 - Mention the `labelmap.pbtxt` file path
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/32_.jpg?raw=true)
 
-- Make these changes
+- Make following changes too.
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/33_.jpg?raw=true)
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/34_.jpg?raw=true)
+
+- Run all the cells in notebook. And the prediction in the test image will be shown.
 
 
 ### Reference blogs
