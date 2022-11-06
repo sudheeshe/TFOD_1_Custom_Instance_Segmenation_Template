@@ -4,7 +4,8 @@
 
 # PREPARE WORKING ENVIRONMENT FOR TRAINING 
 
-- Download following files
+- Create a working directory `eg: car_exterior-defect_segmentation_TFOD1`
+- Download following files to working directory
   1) TFOD-1.x (v1.13.0) - [click here](https://github.com/tensorflow/models/tree/v1.13.0)
   2) Choose model  -   [click here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md)
 
@@ -36,7 +37,7 @@
 
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/5_.jpg?raw=true)
 
-- Now open the project in Pycharm and select `python 3.7` as version
+- Now launch the project in Pycharm from working directory and select `python 3.7` as version
 ![alt text](https://github.com/sudheeshe/TFOD_1_Custom_Instance_Segmenation_Template/blob/main/readme_imgs/6_.jpg?raw=true)
 
 - Let's install the following packages in your new environment
