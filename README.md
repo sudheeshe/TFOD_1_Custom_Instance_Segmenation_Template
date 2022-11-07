@@ -301,6 +301,12 @@ python export_inference_graph.py --input_type image_tensor --pipeline_config_pat
 
 - Run all the cells in notebook. And the prediction in the test image will be shown.
 
+#### Note:
+- If you are getting many bounding boxes (by default the threshold is 0.5) we need to increase the bbox confidence threshold
+ For that changes are needed in `visualization_utils.py` file located @ `models/research/object_detection/utils/visualization_utils.py`
+- In this file find `min_score_thresh` variable and give what ever threshold you will like to give at all the places.
+- Now re-run the notebook from begining.
+
 
 ### Reference blogs
 
